@@ -1,12 +1,12 @@
-package io.dnlwjtud;
+package io.dnlwjtud.singletonP;
 
 import java.util.List;
 
-public class aController {
+public class bController {
 
     private final SomeRepository repository;
 
-    public aController(SomeRepository repository) {
+    public bController(SomeRepository repository) {
         this.repository = repository;
     }
 
