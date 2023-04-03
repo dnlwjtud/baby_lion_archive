@@ -1,4 +1,4 @@
-package io.dnlwjtud.singletonP;
+package io.dnlwjtud.singletonPtn;
 
 import java.util.List;
 
