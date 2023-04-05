@@ -5,10 +5,13 @@ import io.dnlwjtud.myBlog.posts.repository.PostRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,19 +21,17 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    // 블로그
-    // 포스팅 기능
-    // CRUD -> 작성 조회 수정 삭제
-    //////////////
-    // 포스트 작성 v
-    // 포스트 수정 v
-    // 포스트 목록 v
-    // 포스트 검색
-    // 포스트 조회 v
-    // 포스트 삭제 v
-    //////////////
+    public List<Post> findAllByTitle(String title, Pageable pageable) {
+        List<Post> postList = postRepository.findAllByTitleContaining(title, pageable);
+        return postList;
 
-    // 포스트 삭제
+    }
+
+    public List<Post> findAll() {
+        List<Post> postList = postRepository.findAll();
+        return postList;
+    }
+
     @Transactional
     public void removeById(Long id) {
 
