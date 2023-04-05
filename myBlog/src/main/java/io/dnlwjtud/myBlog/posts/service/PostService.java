@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,14 +34,12 @@ public class PostService {
     @Transactional
     public void removeById(Long id) {
 
-        // 1. 포스트 객체를 불러온다
         Post findPost = getById(id);
 
         if ( findPost == null ) {
             return;
         }
 
-        // 2. 삭제
         postRepository.delete(findPost);
 
     }
@@ -65,8 +62,11 @@ public class PostService {
 
 
     @Transactional
-    public Long save(String title, String body, LocalDateTime createdAt, LocalDateTime updatedAt){
-        return postRepository.save(Post.createPost(title,body,createdAt, updatedAt)).getId();
+    public Long save(String title, String body){
+
+        Post save = postRepository.save(Post.createPost(title, body));
+
+        return save.getId();
     }
 
     // 포스트 검색

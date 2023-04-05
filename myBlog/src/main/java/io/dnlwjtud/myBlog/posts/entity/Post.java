@@ -3,11 +3,13 @@ package io.dnlwjtud.myBlog.posts.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@ToString
 public class Post {
 
     // 번호
@@ -30,19 +32,19 @@ public class Post {
     // 누가 썼는지
 
     // 언제 썼는지
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
     // 언제 수정되었는지
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
-    public static Post createPost(String title, String body, LocalDateTime createdAt, LocalDateTime updatedAt ) {
+    public static Post createPost(String title, String body) {
 
         Post post = new Post();
 
         post.title = title;
         post.body = body;
 
-        post.createdAt = createdAt;
-        post.updatedAt = updatedAt;
+//        post.createdAt = LocalDateTime.now();
+//        post.updatedAt = LocalDateTime.now();
 
         return post;
 
