@@ -4,13 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UriParser {
-    /*
-    @ 본 프로젝트에서 기대되는 URL 입력 형태
 
-    1. /controller/target -> 파라미터가 없는 형태의  URL
-    2. /controller/target?param=1 -> 단일 파라미터가 있는 URL
-    3. /controller/target?param1=val1&param2=val2 -> 복합 파라미터가 있는 URL
-     */
     private final String URI;
 
     private String controllerCode;
@@ -27,7 +21,6 @@ public class UriParser {
 
     protected String parse(String uri) {
 
-        // '/' articles/update
         if ( !uri.startsWith("/") ) {
             this.isValidUri = false;
             return uri;
@@ -35,22 +28,17 @@ public class UriParser {
 
         String[] uriSplit = uri.split("\\?", 2);
 
-        // /articles/update '?' key1=val1&...
         if ( uriSplit.length == 2 ) {
             setParameters(uriSplit[1]);
         }
 
-        // /Controller/target
-        // /articles/update
         String[] uriFront = uriSplit[0].split("/");
-        // [ "", articles, update ]
 
         if ( uriFront.length != 3 ) {
             this.isValidUri = false;
             return uri;
         }
 
-        // [ "", articles, update ]
         this.controllerCode = uriFront[1];
         this.targetMethod = uriFront[2];
 
@@ -90,6 +78,23 @@ public class UriParser {
 
     }
 
+    protected String getURI() {
+        return URI;
+    }
 
+    protected String getControllerCode() {
+        return controllerCode;
+    }
 
+    protected String getTargetMethod() {
+        return targetMethod;
+    }
+
+    protected boolean isValidUri() {
+        return isValidUri;
+    }
+
+    protected Map<String, Object> getParameters() {
+        return parameters;
+    }
 }
