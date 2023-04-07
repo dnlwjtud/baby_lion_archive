@@ -2,15 +2,36 @@
 <html lang="ko">
     <head>
         <meta charset="UTF-8">
-        <title>ㅇㅇ 블로그 - 포스트 작성</title>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>포스트 작성</title>
     </head>
     <body>
-        <div>
+        <div class="container mx-auto">
+            <div class="post-write container">
+
+                <div class="post-write-header">
+                    <h1>
+                        포스트 작성
+                    </h1>
+                </div>
+
+                <div class="post-write contents">
+                    <form action="/posts/write" method="POST">
+                        <input name="title" type="text" placeholder="Type here" class="input input-bordered input-accent w-full max-w-xs" />
+                        <textarea name="body" class="textarea textarea-accent" placeholder="Bio"></textarea>
+                        <button class="btn btn-success">작성</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <!--<div>
             <form action="">
                 <input type="text" name="title">
                 <textarea name="body" cols="30" rows="10"></textarea>
                 <button> 전송 </button>
             </form>
-        </div>
+        </div>-->
     </body>
 </html>
