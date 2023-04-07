@@ -55,8 +55,7 @@ public class PostService {
             return;
         }
 
-        findPost.setTitle(title);
-        findPost.setBody(body);
+        findPost.update(title, body);
 
     }
 

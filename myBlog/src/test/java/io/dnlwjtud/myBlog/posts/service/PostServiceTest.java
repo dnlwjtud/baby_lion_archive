@@ -112,14 +112,16 @@ class PostServiceTest {
     @DisplayName("게시물 수정 테스트")
     public void updateTest() {
 
-        // given
-        postService.save("title1", "body1")
+
+        Long savedId = postService.save("title1", "body1");
+
 
         // when
-
+        postService.updateById(savedId, "updated title", "updated body");
+        Post updatedPost = postService.getById(savedId);
 
         // then
-
+        assertThat(updatedPost.getTitle()).isEqualTo("updated title");
 
 
     }
