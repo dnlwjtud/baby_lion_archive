@@ -13,6 +13,7 @@ public class MyBlogApplication {
 }
 
 /*
+HttpRequestServlet
 글과 관련된 기능
 회원과 관련된 기능
  */

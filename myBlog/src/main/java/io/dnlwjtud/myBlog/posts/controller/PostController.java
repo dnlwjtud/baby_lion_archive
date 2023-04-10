@@ -1,5 +1,6 @@
 package io.dnlwjtud.myBlog.posts.controller;
 
+import io.dnlwjtud.myBlog.posts.entity.Post;
 import io.dnlwjtud.myBlog.posts.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,22 +22,21 @@ public class PostController {
     public String postWrite(
             String title, String body
     ) {
-        System.out.println("title = " + title);
-        System.out.println("body = " + body);
-
         Long savedId = postService.save(title, body);
-
-        System.out.println("savedId = " + savedId);
-
         return "redirect:/";
     }
 
-    // Spring MVC
-    // Spring 요청 - 응답 흐름
-    // Request -> Controller -> Service -> Repository -> Service -> Controller -> Response
-    // HTTP Method¡
-    // GET, POST
+    @GetMapping("/posts/{id}")
+    public String getPost(
+            @PathVariable Long id,
+            Model model
+    ) {
+        Post findPost = postService.getById(id);
 
+        model.addAttribute("post", findPost); // Map<String, Object>
+        return "/posts/post_detail";
+    }
 
 
 }
+
