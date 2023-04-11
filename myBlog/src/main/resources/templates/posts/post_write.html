@@ -1,30 +1,37 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/edit_layout}">
     <head>
-        <meta charset="UTF-8">
-        <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css" />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <title>포스트 작성</title>
+        <title>BABY LION :: 포스트 작성</title>
+
     </head>
     <body>
-        <div class="container mx-auto">
-            <div class="post-write container">
+        <div layout:fragment="content" class="w-full">
+            <div class="write-contents flex flex-col">
 
-                <div class="post-write-header">
-                    <h1>
-                        포스트 작성
-                    </h1>
-                </div>
+                    <div class="post-write-header flex p-8">
+                        <span class="text-5xl">
+                            Post Write
+                        </span>
+                    </div>
 
-                <div class="post-write contents">
-                    <form action="/posts/write" method="POST">
-                        <input name="title" type="text" placeholder="Type here" class="input input-bordered input-accent w-full max-w-xs" />
-                        <textarea name="body" class="textarea textarea-accent" placeholder="Bio"></textarea>
-                        <button class="btn btn-success">작성</button>
-                    </form>
-                </div>
+                    <div class="post-write contents flex flex-col">
+                        <input name="title" type="text" placeholder="Title here" class="input input-bordered input-info w-full" />
+                        <div class="mt-8 h-full" id="editor"></div>
+                    </div>
+
+                    <div class="post-write-btn flex flex-row justify-end mt-4">
+
+                        <button class="btn btn-success">Confirm</button>
+                        <button class="btn btn-error mx-4">Cancel</button>
+
+                    </div>
 
             </div>
+            <script src="/js/edit_default.js"></script>
         </div>
+
     </body>
 </html>
