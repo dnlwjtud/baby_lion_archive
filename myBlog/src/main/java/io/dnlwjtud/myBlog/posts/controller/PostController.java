@@ -7,18 +7,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
+@RequestMapping("/posts")
 @RequiredArgsConstructor
 public class PostController {
 
     private final PostService postService;
 
-    @GetMapping("/posts/write")
+    @GetMapping("/list")
+    @ResponseBody
+    public List<Post> getPostList() {
+        List<Post> postList = postService.findAll();
+        return postList;
+    }
+
+    @GetMapping("/write")
     public String getPostWriteView() {
         return "/posts/post_write";
     }
 
-    @PostMapping("/posts/write")
+    @PostMapping("/write")
     public String postWrite(
             String title, String body
     ) {
@@ -26,7 +36,7 @@ public class PostController {
         return "redirect:/";
     }
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/{id}")
     public String getPost(
             @PathVariable Long id,
             Model model
@@ -37,10 +47,6 @@ public class PostController {
         return "/posts/post_detail";
     }
 
-    @GetMapping("/posts/test")
-    public String testPage() {
-        return "/tmp/4xx";
-    }
 
 
 }
