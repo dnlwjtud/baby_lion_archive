@@ -37,6 +37,11 @@ public class PostController {
         return "/posts/post_detail";
     }
 
+    @GetMapping("/posts/test")
+    public String testPage() {
+        return "/tmp/4xx";
+    }
+
 
 }
 
