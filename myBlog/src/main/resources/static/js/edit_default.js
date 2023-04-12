@@ -4,5 +4,3 @@ const editor = new toastui.Editor({
     initialEditType: 'markdown',
     previewStyle: 'vertical'
 });
-
-// alert('hello world!');
