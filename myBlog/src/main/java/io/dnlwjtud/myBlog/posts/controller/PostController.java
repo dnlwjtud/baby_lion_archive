@@ -2,6 +2,8 @@ package io.dnlwjtud.myBlog.posts.controller;
 
 import io.dnlwjtud.myBlog.posts.entity.Post;
 import io.dnlwjtud.myBlog.posts.service.PostService;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,11 +30,14 @@ public class PostController {
         return "/posts/post_write";
     }
 
+    @ResponseBody
     @PostMapping("/write")
     public String postWrite(
-            String title, String body
+            @NotBlank String title, String body
     ) {
-        Long savedId = postService.save(title, body);
+//        Long savedId = postService.save(title, body);
+        System.out.println("title = " + title);
+        System.out.println("body = " + body);
         return "redirect:/";
     }
 
