@@ -1,5 +1,6 @@
 package io.dnlwjtud.myBlog.posts.controller;
 
+import io.dnlwjtud.myBlog.posts.dto.PostWriteDto;
 import io.dnlwjtud.myBlog.posts.entity.Post;
 import io.dnlwjtud.myBlog.posts.service.PostService;
 import jakarta.validation.constraints.NotBlank;
@@ -9,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/posts")
@@ -32,13 +36,19 @@ public class PostController {
 
     @ResponseBody
     @PostMapping("/write")
-    public String postWrite(
-            @NotBlank String title, String body
+    public PostWriteDto postWrite(
+            String title, String body
     ) {
-//        Long savedId = postService.save(title, body);
+
         System.out.println("title = " + title);
         System.out.println("body = " + body);
-        return "redirect:/";
+
+        Long savedId = postService.save(title, body);
+
+        PostWriteDto postWriteDto = new PostWriteDto(savedId);
+
+        return postWriteDto;
+
     }
 
     @GetMapping("/{id}")
