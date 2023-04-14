@@ -23,8 +23,6 @@ function writePost(e) {
     console.log('HTML', htmlData);
     console.log('MarkDown', markdownData);
 
-    // @ToString X
-
     // form
     const formData = new FormData();
     formData.append('title', postTitle );
