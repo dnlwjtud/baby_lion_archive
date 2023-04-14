@@ -17,52 +17,41 @@
                     Recent Post
                 </span>
             </div>
+<!--            <th:block>-->
+<!--                <div th:text="${postList}">-->
 
+<!--                </div>-->
+<!--            </th:block>-->
             <div class="divider"></div>
 
-            <th:block th:each="m : ${#numbers.sequence(1,5)}">
+            <th:block th:each="m : ${postList}">
                 <div class="card w-full bg-base-100 shadow-xl mt-12">
                     <div class="card-body">
 
+<!--                        -->
+
+<!--                        <div>-->
+<!--                            m변수 안에 들어있는 것 : [[ ${m} ]]-->
+<!--                        </div>-->
+
                         <div class="title-wrapper">
                             <span class="text-4xl">
-                                Title [[${m}]]
+                                Title [[${m.title}]]
                             </span>
                             <span class="post-title-meta flex mt-6 text-sm">
-                                Created At : 2023-04-11
+                                Created At : [[ ${m.createdAt} ]]
                             </span>
                             <span class="text-sm"> Writer : Anonymous</span>
                         </div>
 
                         <div class="divider"></div>
 
-                        <div class="content-wrapper mt*8">
-                            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam at corporis est eveniet fugit odio quas repellat, suscipit vel! Aliquam consequuntur ea harum illo iure placeat quia quidem sint.</p>
-                            <br>
-                            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam at corporis est eveniet fugit odio quas repellat, suscipit vel! Aliquam consequuntur ea harum illo iure placeat quia quidem sint. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium at deleniti dolor fugit illo ipsa ipsam iste minus, nostrum officia placeat, possimus provident quidem repellat sunt temporibus tenetur voluptas, voluptates!</p>
-                            <br>
-                            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam at corporis est eveniet fugit odio quas repellat, suscipit vel! Aliquam consequuntur ea harum illo iure placeat quia quidem sint.</p>
+                        <div class="content-wrapper mt*8" th:text="${m.body}">
                         </div>
 
                     </div>
                 </div>
             </th:block>
-
-            <script>
-
-                fetch("http://localhost:8083/posts/list")
-                    .then(
-                        (resp) => {
-                            return resp.json();
-                        }
-                    ).then( (data) => {
-                        console.log("data", data);
-                    })
-                    .catch( (error) => {
-                        console.log('error', error);
-                     });
-
-            </script>
 
         </div>
 

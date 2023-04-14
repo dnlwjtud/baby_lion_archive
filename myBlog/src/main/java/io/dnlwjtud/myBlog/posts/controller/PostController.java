@@ -62,7 +62,5 @@ public class PostController {
         return "/posts/post_detail";
     }
 
-
-
 }
 
