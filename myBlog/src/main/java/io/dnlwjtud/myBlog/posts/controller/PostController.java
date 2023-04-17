@@ -41,12 +41,7 @@ public class PostController {
     public PostWriteDto postWrite(
             @RequestBody @Valid PostWriteRequest postWriteRequest
     ) {
-
-//        Long savedId = postService.save(postWriteRequest);
-//        PostWriteDto postWriteDto = new PostWriteDto(savedId);
-
         return postService.save(postWriteRequest);
-
     }
 
     @GetMapping("/{id}")
@@ -55,9 +50,18 @@ public class PostController {
             Model model
     ) {
         Post findPost = postService.getById(id);
-
         model.addAttribute("post", findPost); // Map<String, Object>
         return "/posts/post_detail";
+    }
+
+    @GetMapping("/update/{id}")
+    public String getUpdateView(
+            @PathVariable Long id,
+            Model model
+    ) {
+        Post findPost = postService.getById(id);
+        model.addAttribute("post", findPost);
+        return "/posts/post_update";
     }
 
 }

@@ -2,7 +2,8 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/edit_layout}">
+      layout:decorate="~{layouts/edit_layout}"
+>
 <head>
     <title>BABY LION :: 포스트 편집</title>
 
@@ -12,13 +13,13 @@
     <div class="write-contents flex flex-col">
 
         <div class="post-write-header flex p-8">
-                        <span class="text-5xl">
-                            Post Edit
-                        </span>
+            <span class="text-5xl">
+                Post Edit
+            </span>
         </div>
 
         <div class="post-write contents flex flex-col">
-            <input name="title" type="text" placeholder="Title here" class="input input-bordered input-info w-full" />
+            <input id="post-title" name="title" type="text" placeholder="Title here" class="input input-bordered input-info w-full" />
             <div class="mt-8 h-full" id="editor"></div>
         </div>
 
@@ -30,7 +31,25 @@
         </div>
 
     </div>
-    <script src="/js/edit_default.js"></script>
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/ /*]]>*/
+
+        const postTitleEl = document.querySelector('#post-title');
+
+        postTitleEl.value = /*[[ ${post.title} ]]*/;
+
+        const editor = new toastui.Editor({
+            el: document.querySelector('#editor'),
+            height: '550px',
+            initialEditType: 'markdown',
+            previewStyle: 'vertical'
+        });
+
+        editor.setMarkdown(/*[[ ${post.markdownBody} ]]*/);
+        editor.setHTML(/*[[ ${post.htmlBody} ]]*/);
+
+    </script>
 </div>
 
 </body>
