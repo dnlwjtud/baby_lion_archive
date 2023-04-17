@@ -1,12 +1,11 @@
 package io.dnlwjtud.myBlog.posts.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostWriteDto {
+public class PostEditDto {
 
     private Long postId;
 

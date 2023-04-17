@@ -1,18 +1,15 @@
 package io.dnlwjtud.myBlog.posts.service;
 
 import io.dnlwjtud.myBlog.posts.dto.PostUpdateDto;
-import io.dnlwjtud.myBlog.posts.dto.PostWriteDto;
+import io.dnlwjtud.myBlog.posts.dto.PostEditDto;
 import io.dnlwjtud.myBlog.posts.dto.PostWriteRequest;
 import io.dnlwjtud.myBlog.posts.entity.Post;
 import io.dnlwjtud.myBlog.posts.repository.PostRepository;
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,25 +47,27 @@ public class PostService {
 
     // 포스트 수정
     @Transactional
-    public void updateById(PostUpdateDto postUpdateDto) {
+    public PostEditDto updateById(Long id, PostUpdateDto postUpdateDto) {
 
-        Post findPost = getById(postUpdateDto.getId());
+        Post findPost = getById(id);
 
         if ( findPost == null ) {
-            return;
+            return null;
         }
 
         findPost.update(postUpdateDto);
+
+        return new PostEditDto(findPost.getId());
 
     }
 
 
     @Transactional
-    public PostWriteDto save(PostWriteRequest postWriteRequest){
+    public PostEditDto save(PostWriteRequest postWriteRequest){
 
         Post savedPost = postRepository.save(Post.createPost(postWriteRequest));
 
-        return new PostWriteDto(savedPost.getId());
+        return new PostEditDto(savedPost.getId());
 
     }
 

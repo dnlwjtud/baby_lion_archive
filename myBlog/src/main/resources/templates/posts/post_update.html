@@ -25,8 +25,8 @@
 
         <div class="post-write-btn flex flex-row justify-end mt-4">
 
-            <button class="btn btn-success">Confirm</button>
-            <button class="btn btn-error mx-4">Cancel</button>
+            <button class="btn btn-success" onclick="doUpdate()">Confirm</button>
+            <button class="btn btn-error mx-4" onclick="history.go(-1)" >Cancel</button>
 
         </div>
 
@@ -34,6 +34,8 @@
     <script th:inline="javascript">
 
         /*<![CDATA[*/ /*]]>*/
+
+        const postId = /*[[ ${post.id} ]]*/;
 
         const postTitleEl = document.querySelector('#post-title');
 
@@ -48,6 +50,48 @@
 
         editor.setMarkdown(/*[[ ${post.markdownBody} ]]*/);
         editor.setHTML(/*[[ ${post.htmlBody} ]]*/);
+
+        function doUpdate(e) {
+
+            const title = document.querySelector("#post-title")
+                .value;
+
+            const htmlBody = editor.getHTML();
+            const markdownBody = editor.getMarkdown();
+
+            const data = {
+                title,
+                htmlBody,
+                markdownBody
+            };
+
+            fetch(`http://localhost:8083/posts/update/${postId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body : JSON.stringify(data)
+            })
+                .then(
+                    (resp) => {
+                        return resp.json()
+                    }
+                )
+                .then(
+                    (data) => {
+
+                        alert("포스트 수정이 완료되었습니다!");
+                        location.replace(`/posts/${data.postId}`);
+
+                    }
+                )
+                .catch(
+                    (err) => {
+                        console.log(err);
+                    }
+                )
+
+        }
 
     </script>
 </div>
