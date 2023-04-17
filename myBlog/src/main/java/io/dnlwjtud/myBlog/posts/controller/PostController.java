@@ -1,8 +1,10 @@
 package io.dnlwjtud.myBlog.posts.controller;
 
 import io.dnlwjtud.myBlog.posts.dto.PostWriteDto;
+import io.dnlwjtud.myBlog.posts.dto.PostWriteRequest;
 import io.dnlwjtud.myBlog.posts.entity.Post;
 import io.dnlwjtud.myBlog.posts.service.PostService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -37,14 +39,12 @@ public class PostController {
     @ResponseBody
     @PostMapping("/write")
     public PostWriteDto postWrite(
-            String title, String body
+            @RequestBody @Valid PostWriteRequest postWriteRequest
     ) {
 
-        System.out.println("title = " + title);
-        System.out.println("body = " + body);
+        System.out.println("postWriteRequest.getTitle() = " + postWriteRequest.getTitle());
 
-        Long savedId = postService.save(title, body);
-
+        Long savedId = postService.save(postWriteRequest.getTitle(), postWriteRequest.getBody());
         PostWriteDto postWriteDto = new PostWriteDto(savedId);
 
         return postWriteDto;

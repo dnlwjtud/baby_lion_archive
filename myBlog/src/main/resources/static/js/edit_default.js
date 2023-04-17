@@ -23,15 +23,25 @@ function writePost(e) {
     console.log('HTML', htmlData);
     console.log('MarkDown', markdownData);
 
+    // json
+
     // form
-    const formData = new FormData();
-    formData.append('title', postTitle );
-    formData.append('body', htmlData);
+    // const formData = new FormData();
+    // formData.append('title', postTitle );
+    // formData.append('body', htmlData);
+
+    const data = {
+        "title" : postTitle,
+        "body" : htmlData
+    };
 
 
     fetch("http://localhost:8083/posts/write", {
         method: "POST",
-        body : formData
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body : JSON.stringify(data)
     })
     .then(
         (resp) => resp.json()
