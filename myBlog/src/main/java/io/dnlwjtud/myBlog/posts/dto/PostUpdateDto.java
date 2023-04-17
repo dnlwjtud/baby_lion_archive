@@ -1,19 +1,19 @@
 package io.dnlwjtud.myBlog.posts.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class PostWriteRequest {
+@AllArgsConstructor
+public class PostUpdateDto {
 
-    @NotBlank
+    private Long id;
+
     private String title;
 
-    private String htmlBody;
     private String markdownBody;
+    private String htmlBody;
 
 }

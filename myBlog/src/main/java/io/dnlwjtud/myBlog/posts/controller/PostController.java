@@ -42,12 +42,10 @@ public class PostController {
             @RequestBody @Valid PostWriteRequest postWriteRequest
     ) {
 
-        System.out.println("postWriteRequest.getTitle() = " + postWriteRequest.getTitle());
+//        Long savedId = postService.save(postWriteRequest);
+//        PostWriteDto postWriteDto = new PostWriteDto(savedId);
 
-        Long savedId = postService.save(postWriteRequest.getTitle(), postWriteRequest.getBody());
-        PostWriteDto postWriteDto = new PostWriteDto(savedId);
-
-        return postWriteDto;
+        return postService.save(postWriteRequest);
 
     }
 

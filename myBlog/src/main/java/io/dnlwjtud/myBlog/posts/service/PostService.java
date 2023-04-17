@@ -1,5 +1,8 @@
 package io.dnlwjtud.myBlog.posts.service;
 
+import io.dnlwjtud.myBlog.posts.dto.PostUpdateDto;
+import io.dnlwjtud.myBlog.posts.dto.PostWriteDto;
+import io.dnlwjtud.myBlog.posts.dto.PostWriteRequest;
 import io.dnlwjtud.myBlog.posts.entity.Post;
 import io.dnlwjtud.myBlog.posts.repository.PostRepository;
 import jakarta.persistence.EntityManager;
@@ -47,25 +50,26 @@ public class PostService {
 
     // 포스트 수정
     @Transactional
-    public void updateById(Long id, String title, String body) {
+    public void updateById(PostUpdateDto postUpdateDto) {
 
-        Post findPost = getById(id);
+        Post findPost = getById(postUpdateDto.getId());
 
         if ( findPost == null ) {
             return;
         }
 
-        findPost.update(title, body);
+        findPost.update(postUpdateDto);
 
     }
 
 
     @Transactional
-    public Long save(String title, String body){
+    public PostWriteDto save(PostWriteRequest postWriteRequest){
 
-        Post save = postRepository.save(Post.createPost(title, body));
+        Post savedPost = postRepository.save(Post.createPost(postWriteRequest));
 
-        return save.getId();
+        return new PostWriteDto(savedPost.getId());
+
     }
 
     // 포스트 검색

@@ -14,25 +14,14 @@ function writePost(e) {
     const postTitle = document.querySelector("#post-title")
         .value;
 
-    console.log('postTitle' , postTitle);
-
     // 포스트의 내용
-    const htmlData = editor.getHTML();
-    const markdownData = editor.getMarkdown();
-
-    console.log('HTML', htmlData);
-    console.log('MarkDown', markdownData);
-
-    // json
-
-    // form
-    // const formData = new FormData();
-    // formData.append('title', postTitle );
-    // formData.append('body', htmlData);
+    const htmlBody = editor.getHTML();
+    const markdownBody = editor.getMarkdown();
 
     const data = {
         "title" : postTitle,
-        "body" : htmlData
+        htmlBody,  // "htmlBody" : htmlBody
+        markdownBody
     };
 
 

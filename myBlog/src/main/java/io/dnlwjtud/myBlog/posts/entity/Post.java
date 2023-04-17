@@ -1,5 +1,7 @@
 package io.dnlwjtud.myBlog.posts.entity;
 
+import io.dnlwjtud.myBlog.posts.dto.PostUpdateDto;
+import io.dnlwjtud.myBlog.posts.dto.PostWriteRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,41 +20,46 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter
     // 제목
     private String title;
 
 
     // 내용
-    @Setter
     @Column(columnDefinition = "TEXT")
-    private String body;
+    private String markdownBody;
 
-    // 차후
-    // 누가 썼는지
+    @Column(columnDefinition = "TEXT")
+    private String htmlBody;
+
+    // TODO: 누가 작성했는지를 등록
+
 
     // 언제 썼는지
     private LocalDateTime createdAt = LocalDateTime.now();
     // 언제 수정되었는지
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    public void update(String title, String body) {
-        this.title = title;
-        this.body = body;
+
+    public void update(PostUpdateDto postUpdateDto) {
+
+        this.title = postUpdateDto.getTitle();
+
+        this.htmlBody =  postUpdateDto.getHtmlBody();
+        this.markdownBody = postUpdateDto.getMarkdownBody();
 
         this.updatedAt = LocalDateTime.now();
+
     }
 
 
-    public static Post createPost(String title, String body) {
+    public static Post createPost(PostWriteRequest postWriteRequest) {
 
         Post post = new Post();
 
-        post.title = title;
-        post.body = body;
+        post.title = postWriteRequest.getTitle();
 
-//        post.createdAt = LocalDateTime.now();
-//        post.updatedAt = LocalDateTime.now();
+        post.markdownBody = postWriteRequest.getMarkdownBody();
+        post.htmlBody = postWriteRequest.getHtmlBody();
 
         return post;
 
