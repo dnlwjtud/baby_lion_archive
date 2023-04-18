@@ -27,7 +27,7 @@ public class PostService {
     }
 
     public List<Post> findAll() {
-        List<Post> postList = postRepository.findAll();
+        List<Post> postList = postRepository.findAllByDeleteStatusFalse();
         return postList;
     }
 
@@ -45,7 +45,6 @@ public class PostService {
     }
 
 
-    // 포스트 수정
     @Transactional
     public PostEditDto updateById(Long id, PostUpdateDto postUpdateDto) {
 
@@ -71,12 +70,13 @@ public class PostService {
 
     }
 
-    // 포스트 검색
     public Post getById(Long id) {
         Optional<Post> findPost = postRepository.findById(id);
 
         if ( findPost.isPresent() ) {
-            return findPost.get();
+            if ( !findPost.get().isDeleteStatus() ) {
+                return findPost.get();
+            }
         }
 
         return null;
