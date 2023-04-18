@@ -69,5 +69,11 @@ public class PostController {
         return postService.updateById(id, postUpdateDto);
     }
 
+    @GetMapping("/delete/{id}")
+    public String removeById(@PathVariable(name = "id") Long id) {
+        postService.removeById(id);
+        return "redirect:/";
+    }
+
 }
 

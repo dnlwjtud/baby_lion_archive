@@ -3,15 +3,12 @@ package io.dnlwjtud.myBlog.posts.entity;
 import io.dnlwjtud.myBlog.posts.dto.PostUpdateDto;
 import io.dnlwjtud.myBlog.posts.dto.PostWriteRequest;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@ToString
 public class Post {
 
     // 번호
@@ -33,12 +30,18 @@ public class Post {
 
     // TODO: 누가 작성했는지를 등록
 
+    private boolean deleteStatus = false;
+    private LocalDateTime deletedAt;
 
     // 언제 썼는지
     private LocalDateTime createdAt = LocalDateTime.now();
     // 언제 수정되었는지
     private LocalDateTime updatedAt = LocalDateTime.now();
 
+    public void delete() {
+        this.deleteStatus = true;
+        this.deletedAt = LocalDateTime.now();
+    }
 
     public void update(PostUpdateDto postUpdateDto) {
 

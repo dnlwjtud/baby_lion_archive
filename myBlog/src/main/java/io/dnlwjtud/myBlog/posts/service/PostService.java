@@ -40,7 +40,7 @@ public class PostService {
             return;
         }
 
-        postRepository.delete(findPost);
+        findPost.delete();
 
     }
 

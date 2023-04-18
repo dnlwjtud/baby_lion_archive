@@ -17,22 +17,12 @@
                     Recent Post
                 </span>
             </div>
-<!--            <th:block>-->
-<!--                <div th:text="${postList}">-->
 
-<!--                </div>-->
-<!--            </th:block>-->
             <div class="divider"></div>
 
             <th:block th:each="m : ${postList}">
                 <div class="card w-full bg-base-100 shadow-xl mt-12">
                     <div class="card-body">
-
-<!--                        -->
-
-<!--                        <div>-->
-<!--                            m변수 안에 들어있는 것 : [[ ${m} ]]-->
-<!--                        </div>-->
 
                         <div class="title-wrapper">
                             <span class="text-4xl">
@@ -46,18 +36,7 @@
 
                         <div class="divider"></div>
 
-                        <!--
-                        String body = "멘토 가라사대 \" \" "
-                        th:utext 이스케이프
-
-                        th:text
-                        <h1> 부제목 </h1>
-
-                        th:utext
-                        <h1> 부제목 </h1>
-
-                        -->
-                        <div class="content-wrapper mt*8" th:text="${m.body}">
+                        <div class="content-wrapper mt*8" th:text="${m.htmlBody}">
                         </div>
 
                     </div>
