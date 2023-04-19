@@ -29,14 +29,17 @@
                                 [[ ${m.title} ]]
                             </span>
                             <span class="post-title-meta flex mt-6 text-sm">
-                                Created At : [[ ${m.createdAt} ]]
+                                Created At : [[ ${#temporals.format(m.createdAt, 'yyyy-MM-dd HH:mm')} ]]
+                            </span>
+                            <span class="post-title-meta flex text-sm">
+                                Updated At : [[ ${#temporals.format(m.updatedAt, 'yyyy-MM-dd HH:mm')} ]]
                             </span>
                             <span class="text-sm"> Writer : Anonymous </span>
                         </div>
 
                         <div class="divider"></div>
 
-                        <div class="content-wrapper mt*8" th:text="${m.htmlBody}">
+                        <div class="content-wrapper mt*8" th:utext="${m.htmlBody}">
                         </div>
 
                     </div>
