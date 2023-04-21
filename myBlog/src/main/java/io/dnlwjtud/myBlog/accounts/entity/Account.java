@@ -62,7 +62,7 @@ public class Account implements UserDetails {
         return this.roles
                 .stream()
                 .map(
-                        roleItem -> new SimpleGrantedAuthority(roleItem.getValue())
+                        roleItem -> new SimpleGrantedAuthority("ROLE_"+roleItem.getValue())
                 ).toList();
     }
 
