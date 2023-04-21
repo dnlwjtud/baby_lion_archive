@@ -47,9 +47,14 @@ public class Account implements UserDetails {
         account.password = accountCreateDto.getPassword();
 
         account.nickname = accountCreateDto.getNickname();
+        account.roles.add(Role.MEMBER);
 
         return account;
 
+    }
+
+    public void appendRole(Role role) {
+        this.roles.add(role);
     }
 
     @Override // 권한들 반환

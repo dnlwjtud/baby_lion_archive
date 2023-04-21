@@ -13,7 +13,7 @@ public class DataInit {
             AccountService accountService
     ) {
         return args -> {
-
+            accountService.initAccountData();
         };
     }
 
