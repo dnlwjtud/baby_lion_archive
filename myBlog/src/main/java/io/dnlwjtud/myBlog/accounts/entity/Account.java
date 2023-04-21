@@ -1,8 +1,10 @@
 package io.dnlwjtud.myBlog.accounts.entity;
 
+import io.dnlwjtud.myBlog.accounts.dto.AccountCreateDto;
 import io.dnlwjtud.myBlog.accounts.dto.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +25,9 @@ public class Account implements UserDetails {
     private String username; // 계정
     private String password; // 비밀번호
 
+    private String nickname;
+
+    @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 
@@ -31,15 +36,29 @@ public class Account implements UserDetails {
     private boolean credentialsExpiredStatus = false; // 비밀번호 만료 여부
     private boolean enableStatus = true; // 계정 활성화 여부
 
+    protected Account() {
+    }
+
+    public static Account createAccount(AccountCreateDto accountCreateDto) {
+
+        Account account = new Account();
+
+        account.username = accountCreateDto.getUsername();
+        account.password = accountCreateDto.getPassword();
+
+        account.nickname = accountCreateDto.getNickname();
+
+        return account;
+
+    }
+
     @Override // 권한들 반환
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles
                 .stream()
-                //.map(SimpleGrantedAuthority::new) -> Enum에서 값을 직접 가져올 수 없기 때문에 생성자에 할당할 수 없기 때문에 사용할 수 없음
                 .map(
-                        i -> new SimpleGrantedAuthority(i.getValue())
+                        roleItem -> new SimpleGrantedAuthority(roleItem.getValue())
                 ).toList();
-
     }
 
     @Override // 비밀번호 반환
