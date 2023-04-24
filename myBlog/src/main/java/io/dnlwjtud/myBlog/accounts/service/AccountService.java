@@ -28,7 +28,7 @@ public class AccountService implements UserDetailsService {
         AccountCreateDto accountCreateDto = new AccountCreateDto("admin", passwordEncoder.encode("admin"), "관리자");
         Account account = Account.createAccount(accountCreateDto);
 
-//        account.appendRole(Role.ADMIN);
+        account.appendRole(Role.ADMIN);
 
         accountRepository.save(account);
 

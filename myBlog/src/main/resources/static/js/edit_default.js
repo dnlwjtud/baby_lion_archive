@@ -11,12 +11,8 @@ const editor = new toastui.Editor({
 function writePost(e) {
 
     // DOM (document)
-    const headerName = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
+    // const headerName = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
     const tokenValue = document.querySelector("meta[name='_csrf']").getAttribute("content");
-
-    console.log( 'headerName', headerName);
-    console.log( 'tokenValue', tokenValue);
-
 
     // 제목
     const postTitle = document.querySelector("#post-title")
@@ -32,33 +28,36 @@ function writePost(e) {
         markdownBody
     };
 
+    /*
+    headerName X-CSRF-TOKEN
+     */
+    fetch("http://localhost:8083/posts/write", {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json",
+            "X-CSRF-TOKEN" : tokenValue
+        },
+        body : JSON.stringify(data)
+    })
+    .then(
+        (resp) => resp.json()
+    )
+    .then(
+        (data) => {
 
-    // fetch("http://localhost:8083/posts/write", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type" : "application/json"
-    //     },
-    //     body : JSON.stringify(data)
-    // })
-    // .then(
-    //     (resp) => resp.json()
-    // )
-    // .then(
-    //     (data) => {
-    //
-    //         console.log(data); // {postId:10}
-    //
-    //         alert("포스트 작성이 완료되었습니다.");
-    //         // location.replace("/posts/" + data.postId);
-    //         location.replace(`/posts/${data.postId}`);
-    //
-    //     }
-    // )
-    // .catch(
-    //     (err) => {
-    //         console.log(err);
-    //     }
-    // )
+            console.log(data); // {postId:10}
+
+            alert("포스트 작성이 완료되었습니다.");
+            // location.replace("/posts/" + data.postId);
+            location.replace(`/posts/${data.postId}`);
+
+        }
+    )
+    .catch(
+        (err) => {
+            console.log(err);
+        }
+    )
 
 
 }

@@ -21,11 +21,12 @@ public class SecurityConfig {
                 .csrf()
             .and()
                 .authorizeHttpRequests()
+                    .requestMatchers("/posts/write")
+                        .hasAnyRole(Role.ADMIN.getValue())
                     .requestMatchers("/posts/**")
-                        .permitAll() // FIXME: Role 구현 후 수정
+                        .permitAll()
                     .requestMatchers("/admin/**")
                         .hasAnyRole(Role.ADMIN.getValue())
-//                        .permitAll() // FIXME: Role 구현 후 수정
                     .anyRequest()
                         .permitAll()
             .and()
