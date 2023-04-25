@@ -11,7 +11,7 @@ const editor = new toastui.Editor({
 function writePost(e) {
 
     // DOM (document)
-    // const headerName = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
+    const headerName = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
     const tokenValue = document.querySelector("meta[name='_csrf']").getAttribute("content");
 
     // 제목
@@ -35,7 +35,7 @@ function writePost(e) {
         method: "POST",
         headers: {
             "Content-Type" : "application/json",
-            "X-CSRF-TOKEN" : tokenValue
+            headerName : tokenValue
         },
         body : JSON.stringify(data)
     })

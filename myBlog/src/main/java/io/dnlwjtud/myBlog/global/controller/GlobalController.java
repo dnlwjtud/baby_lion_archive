@@ -27,4 +27,9 @@ public class GlobalController {
         return "index";
     }
 
+    @GetMapping("/admin/test")
+    public String getTestPage() {
+        return "/admin/admin_index";
+    }
+
 }
