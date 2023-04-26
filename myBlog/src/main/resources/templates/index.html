@@ -8,7 +8,7 @@
     <title>BABY LION :: 아기사자반 블로그</title>
 </head>
 
-    <div layout:fragment="content">
+    <div class="w-full" layout:fragment="content">
 
         <div class="index-container flex flex-col">
 
@@ -23,7 +23,7 @@
 
             <th:block th:if="${postList.size() != 0}" th:each="m : ${postList}">
                 <div class="card w-full bg-base-100 shadow-xl mt-12">
-                    <div class="card-body">
+                    <div class="card-body w-full">
 
                         <div class="title-wrapper">
                             <span class="text-4xl">
@@ -35,7 +35,7 @@
                             <span class="post-title-meta flex text-sm">
                                 Updated At : [[ ${#temporals.format(m.updatedAt, 'yyyy-MM-dd HH:mm')} ]]
                             </span>
-                            <span class="text-sm"> Writer : Anonymous </span>
+                            <span class="text-sm"> Writer : [[ ${m.author.nickname} ]] </span>
                         </div>
 
                         <div class="divider"></div>

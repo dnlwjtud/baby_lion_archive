@@ -4,13 +4,13 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/default_layout}">
 <head>
-    <title>BABY LION :: [[ ${post.id} ]] 번 포스트</title>
+    <title th:if="${post != null}">BABY LION :: [[ ${post.title} ]]</title>
 </head>
 <body>
 
   <div layout:fragment="content" class="w-full">
 
-      <div class="detail-contents container w-full mx-auto px-16 mt-16">
+      <div th:if="${post != null}" class="detail-contents container w-full mx-auto px-16 mt-16">
 
           <div class="post-title-container flex flex-col">
 
@@ -24,7 +24,7 @@
               <span class="post-title-meta flex text-sm">
                   Updated At : [[ ${#temporals.format(post.updatedAt, 'yyyy-MM-dd HH:mm')} ]]
               </span>
-              <span class="text-sm"> Writer : Anonymous</span>
+              <span class="text-sm"> Writer : [[ ${post.author.nickname} ]]</span>
 
           </div>
 
@@ -39,6 +39,14 @@
           </div>
 
       </div>
+
+      <th:block th:unless="${post != null}">
+          <div class="h-full flex flex-col justify-center items-center">
+              <span class="text-6xl">X_X</span>
+              <span class="text-3xl mt-6">Post Could Not Found!</span>
+              <button class="btn btn-success mt-6" onclick="location.replace('/')">Success</button>
+          </div>
+      </th:block>
 
 
   </div>
