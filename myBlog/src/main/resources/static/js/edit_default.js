@@ -43,7 +43,8 @@ function writePost(e) {
 
             alert("포스트 작성이 완료되었습니다.");
 
-            location.replace(`/posts/${data.postId}`);
+            // location.replace(`/posts/${data.postId}`);
+            location.replace("/");
 
         }
     )

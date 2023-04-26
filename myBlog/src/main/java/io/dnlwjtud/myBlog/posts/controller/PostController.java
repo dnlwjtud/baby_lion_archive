@@ -44,15 +44,15 @@ public class PostController {
         return postService.save(postWriteRequest, account);
     }
 
-    @GetMapping("/{id}")
-    public String getPost(
-            @PathVariable Long id,
-            Model model
-    ) {
-        Post findPost = postService.getById(id);
-        model.addAttribute("post", findPost); // Map<String, Object>
-        return "/posts/post_detail";
-    }
+//    @GetMapping("/{id}")
+//    public String getPost(
+//            @PathVariable Long id,
+//            Model model
+//    ) {
+//        Post findPost = postService.getById(id);
+//        model.addAttribute("post", findPost); // Map<String, Object>
+//        return "/posts/post_detail";
+//    }
 
     @GetMapping("/update/{id}")
     public String getUpdateView(
