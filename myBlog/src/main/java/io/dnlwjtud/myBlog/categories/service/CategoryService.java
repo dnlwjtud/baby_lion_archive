@@ -17,6 +17,24 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
+    @Transactional
+    public void categoryInit() {
+
+        // 카테고리 10개 생성
+        for ( int i = 1; i < 11; i++ ) {
+
+            // 10회 save()
+
+            Category category = Category.createCategory(
+                    new CategoryCurdDto("카테고리 " + i, "category " + i)
+            );
+
+            categoryRepository.save(category);
+
+        }
+
+    }
+
 
     // 카테고리 저장
     @Transactional

@@ -33,15 +33,13 @@ public class Post {
     private Account account;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+//    @JoinColumn(name = "category_id")
     private Category category;
 
     private boolean deleteStatus = false;
     private LocalDateTime deletedAt;
 
-    // 언제 썼는지
     private LocalDateTime createdAt = LocalDateTime.now();
-    // 언제 수정되었는지
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     public Post setCategory(Category category) {
