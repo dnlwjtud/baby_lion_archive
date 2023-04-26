@@ -22,7 +22,7 @@ public class GlobalController {
 
         List<Post> postList = postService.findAll();
 
-        model.addAttribute("postList",postList);
+        model.addAttribute("postList", postList);
 
         return "index";
     }

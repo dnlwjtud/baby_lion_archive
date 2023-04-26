@@ -5,9 +5,6 @@ const editor = new toastui.Editor({
     previewStyle: 'vertical'
 });
 
-// 버튼을 클릭했을 때, 이벤트 라는것을 감지하여 데이터를 추출하고
-// Java로 보내는 것
-
 function writePost(e) {
 
     // DOM (document)
@@ -24,18 +21,15 @@ function writePost(e) {
 
     const data = {
         "title" : postTitle,
-        htmlBody,  // "htmlBody" : htmlBody
+        htmlBody,
         markdownBody
     };
 
-    /*
-    headerName X-CSRF-TOKEN
-     */
     fetch("http://localhost:8083/posts/write", {
         method: "POST",
         headers: {
             "Content-Type" : "application/json",
-            headerName : tokenValue
+            [headerName] : tokenValue
         },
         body : JSON.stringify(data)
     })
