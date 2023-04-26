@@ -1,6 +1,6 @@
 package io.dnlwjtud.myBlog.categories.entity;
 
-import io.dnlwjtud.myBlog.categories.dto.EditCategoryDto;
+import io.dnlwjtud.myBlog.categories.dto.CategoryCurdDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public class Category {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    public static Category createCategory(EditCategoryDto createCategoryDto) {
+    public static Category createCategory(CategoryCurdDto createCategoryDto) {
 
         Category category = new Category();
 
@@ -34,7 +34,7 @@ public class Category {
 
     }
 
-    public Category update(EditCategoryDto editCategoryDto) {
+    public Category update(CategoryCurdDto editCategoryDto) {
 
         this.name = editCategoryDto.getName();
         this.updatedAt = LocalDateTime.now();

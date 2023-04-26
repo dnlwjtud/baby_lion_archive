@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditCategoryDto {
+public class CategoryCurdDto {
 
     private String name;
 
