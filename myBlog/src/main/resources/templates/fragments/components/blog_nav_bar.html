@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -24,7 +24,7 @@
 <!--              </li>-->
           </ul>
 
-          <ul class="menu menu-horizontal w-full bg-base-200 rounded-box flex justify-center">
+          <ul sec:authorize="hasRole('ROLE_ADMIN')" class="menu menu-horizontal w-full bg-base-200 rounded-box flex justify-center">
               <li class="flex">
                   <a href="/">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
