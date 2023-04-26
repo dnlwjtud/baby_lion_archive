@@ -1,6 +1,7 @@
 package io.dnlwjtud.myBlog.posts.entity;
 
 import io.dnlwjtud.myBlog.accounts.entity.Account;
+import io.dnlwjtud.myBlog.categories.entity.Category;
 import io.dnlwjtud.myBlog.posts.dto.PostUpdateDto;
 import io.dnlwjtud.myBlog.posts.dto.PostWriteRequest;
 import jakarta.persistence.*;
@@ -21,13 +22,15 @@ public class Post {
     // 제목
     private String title;
 
-
     // 내용
     @Column(columnDefinition = "TEXT")
     private String markdownBody;
 
     @Column(columnDefinition = "TEXT")
     private String htmlBody;
+
+    @ManyToOne
+    private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Account author;
@@ -37,6 +40,12 @@ public class Post {
 
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
+
+    public Post setCategory(Category category) {
+        this.category = category;
+        category.getPostList().add(this);
+        return this;
+    }
 
     public void delete() {
         this.deleteStatus = true;

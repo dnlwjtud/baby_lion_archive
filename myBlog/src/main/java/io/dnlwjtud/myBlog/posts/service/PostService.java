@@ -1,6 +1,7 @@
 package io.dnlwjtud.myBlog.posts.service;
 
 import io.dnlwjtud.myBlog.accounts.entity.Account;
+import io.dnlwjtud.myBlog.categories.service.CategoryService;
 import io.dnlwjtud.myBlog.posts.dto.PostUpdateDto;
 import io.dnlwjtud.myBlog.posts.dto.PostEditDto;
 import io.dnlwjtud.myBlog.posts.dto.PostWriteRequest;
@@ -20,6 +21,7 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final CategoryService categoryService;
 
     public List<Post> findAllByTitle(String title, Pageable pageable) {
         List<Post> postList = postRepository.findAllByTitleContaining(title, pageable);
@@ -65,6 +67,7 @@ public class PostService {
     @Transactional
     public PostEditDto save(PostWriteRequest postWriteRequest, Account account){
         Post savedPost = postRepository.save(Post.createPost(postWriteRequest, account));
+        savedPost.setCategory(categoryService.getByCode(postWriteRequest.getCategoryCode()));
         return new PostEditDto(savedPost.getId());
     }
 

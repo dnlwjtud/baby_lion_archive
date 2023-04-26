@@ -13,10 +13,22 @@
               <li class="menu-title">
                   <span class="text-lg text-primary-focus">Category</span>
               </li>
-              <li th:each="m : ${#numbers.sequence(1,10)}">
-                  <a th:if="${m == 3}" class="active">Category [[${m}]]</a>
-                  <a th:unless="${m == 3}">Category [[${m}]]</a>
+              <li class="menu-all">
+                  <a th:classappend="${#strings.equals(param.category, 'all') ? 'active' : ''} " href="/?category=all">
+                      <span>
+                          전체
+                      </span>
+                  </a>
               </li>
+              <li th:if="${categoryList.size() != 0}" th:each="c : ${categoryList}">
+                  <a th:classappend="${#strings.equals(param.category, c.code) ? 'active' : ''}" th:href="@{/(category = ${c.code})}">
+                      [[ ${c.name} ]]
+                  </a>
+              </li>
+<!--              <li th:each="m : ${#numbers.sequence(1,10)}">-->
+<!--                  <a th:if="${m == 3}" class="active">Category [[${m}]]</a>-->
+<!--                  <a th:unless="${m == 3}">Category [[${m}]]</a>-->
+<!--              </li>-->
           </ul>
 
           <ul class="menu menu-horizontal w-full bg-base-200 rounded-box flex justify-center">
