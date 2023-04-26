@@ -1,5 +1,6 @@
 package io.dnlwjtud.myBlog.posts.entity;
 
+import io.dnlwjtud.myBlog.accounts.entity.Account;
 import io.dnlwjtud.myBlog.posts.dto.PostUpdateDto;
 import io.dnlwjtud.myBlog.posts.dto.PostWriteRequest;
 import jakarta.persistence.*;
@@ -20,7 +21,6 @@ public class Post {
     // 제목
     private String title;
 
-
     // 내용
     @Column(columnDefinition = "TEXT")
     private String markdownBody;
@@ -28,7 +28,8 @@ public class Post {
     @Column(columnDefinition = "TEXT")
     private String htmlBody;
 
-    // TODO: 누가 작성했는지를 등록
+    @ManyToOne//(fetch = FetchType.EAGER)
+    private Account account;
 
     private boolean deleteStatus = false;
     private LocalDateTime deletedAt;
@@ -55,11 +56,13 @@ public class Post {
     }
 
 
-    public static Post createPost(PostWriteRequest postWriteRequest) {
+    public static Post createPost(PostWriteRequest postWriteRequest, Account account) {
 
         Post post = new Post();
 
         post.title = postWriteRequest.getTitle();
+
+        post.account = account;
 
         post.markdownBody = postWriteRequest.getMarkdownBody();
         post.htmlBody = postWriteRequest.getHtmlBody();

@@ -1,5 +1,6 @@
 package io.dnlwjtud.myBlog.posts.controller;
 
+import io.dnlwjtud.myBlog.accounts.entity.Account;
 import io.dnlwjtud.myBlog.posts.dto.PostUpdateDto;
 import io.dnlwjtud.myBlog.posts.dto.PostEditDto;
 import io.dnlwjtud.myBlog.posts.dto.PostWriteRequest;
@@ -7,10 +8,12 @@ import io.dnlwjtud.myBlog.posts.entity.Post;
 import io.dnlwjtud.myBlog.posts.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -35,9 +38,10 @@ public class PostController {
     @ResponseBody
     @PostMapping("/write")
     public PostEditDto postWrite(
-            @RequestBody @Valid PostWriteRequest postWriteRequest
+            @RequestBody @Valid PostWriteRequest postWriteRequest,
+            @AuthenticationPrincipal Account account
     ) {
-        return postService.save(postWriteRequest);
+        return postService.save(postWriteRequest, account);
     }
 
     @GetMapping("/{id}")

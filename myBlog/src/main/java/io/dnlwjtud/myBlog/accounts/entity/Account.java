@@ -2,6 +2,7 @@ package io.dnlwjtud.myBlog.accounts.entity;
 
 import io.dnlwjtud.myBlog.accounts.dto.AccountCreateDto;
 import io.dnlwjtud.myBlog.accounts.dto.Role;
+import io.dnlwjtud.myBlog.posts.entity.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
