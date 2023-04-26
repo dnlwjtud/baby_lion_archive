@@ -25,14 +25,20 @@ public class GlobalController {
     @GetMapping("/") // all
     public String getIndex(
             Model model,
-            @RequestParam(value = "category", defaultValue = "all") String categoryName
+            @RequestParam(value = "category", defaultValue = "all") String categoryCode
     ) {
 
-        List<Post> postList = postService.findAll();
-        List<Category> categoryList = categoryService.findAll();
+        if ( categoryCode.equals("all") ) {
+            List<Post> postList = postService.findAll();
+            model.addAttribute("postList",postList);
+        } else {
+            List<Post> postList = postService.findAllByCategoryCode(categoryCode);
+            model.addAttribute("postList",postList);
+        }
 
-        model.addAttribute("postList",postList);
+        List<Category> categoryList = categoryService.findAll();
         model.addAttribute("categoryList", categoryList);
+        model.addAttribute("curCategory", categoryService.getByCode(categoryCode));
 
         return "index";
     }

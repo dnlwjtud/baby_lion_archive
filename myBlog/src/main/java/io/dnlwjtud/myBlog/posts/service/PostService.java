@@ -30,6 +30,17 @@ public class PostService {
 
     }
 
+    public List<Post> findAllByCategoryCode(String code) {
+
+        Category findCategory = categoryService.getByCode(code);
+        return postRepository.findAllByCategory(findCategory);
+
+    }
+
+    public List<Post> findAllByCategory(Category category) {
+        return postRepository.findAllByCategory(category);
+    }
+
     public List<Post> findAll() {
         List<Post> postList = postRepository.findAllByDeleteStatusFalse();
         return postList;
