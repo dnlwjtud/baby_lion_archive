@@ -11,6 +11,17 @@ function writePost(e) {
     const headerName = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
     const tokenValue = document.querySelector("meta[name='_csrf']").getAttribute("content");
 
+    const selectEl = document.querySelector("#category-select");
+    const categoryCode = selectEl.options[selectEl.selectedIndex].value;
+
+    console.log('categoryCode = ',categoryCode);
+
+    if ( categoryCode === "" ) {
+        alert('카테고리를 선택해주세요.');
+        return;
+    }
+
+
     // 제목
     const postTitle = document.querySelector("#post-title")
         .value;
@@ -22,7 +33,8 @@ function writePost(e) {
     const data = {
         "title" : postTitle,
         htmlBody,
-        markdownBody
+        markdownBody,
+        categoryCode,
     };
 
     fetch("http://localhost:8083/posts/write", {

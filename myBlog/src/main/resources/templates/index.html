@@ -21,7 +21,7 @@
             <div class="divider"></div>
 
 
-            <th:block th:if="${postList.size() != 0}" th:each="m : ${postList}">
+            <th:block th:if="${postList.size() != null}" th:each="m : ${postList}">
                 <div class="card w-full bg-base-100 shadow-xl mt-12">
                     <div class="card-body w-full">
 

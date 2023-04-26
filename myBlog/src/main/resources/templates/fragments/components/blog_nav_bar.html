@@ -20,7 +20,7 @@
                       </span>
                   </a>
               </li>
-              <li th:if="${categoryList.size() != 0}" th:each="c : ${categoryList}">
+              <li th:if="${categoryList != null}" th:each="c : ${categoryList}">
                   <a th:classappend="${#strings.equals(param.category, c.code) ? 'active' : ''}" th:href="@{/(category = ${c.code})}">
                       [[ ${c.name} ]]
                   </a>
