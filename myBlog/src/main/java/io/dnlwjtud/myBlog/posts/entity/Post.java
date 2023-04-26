@@ -53,12 +53,14 @@ public class Post {
         this.deletedAt = LocalDateTime.now();
     }
 
-    public void update(PostUpdateDto postUpdateDto) {
+    public void update(PostUpdateDto postUpdateDto, Category category) {
 
         this.title = postUpdateDto.getTitle();
 
         this.htmlBody =  postUpdateDto.getHtmlBody();
         this.markdownBody = postUpdateDto.getMarkdownBody();
+
+        this.category = category;
 
         this.updatedAt = LocalDateTime.now();
 

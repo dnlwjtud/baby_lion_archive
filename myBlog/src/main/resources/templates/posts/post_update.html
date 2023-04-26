@@ -6,7 +6,6 @@
 >
 <head>
     <title>BABY LION :: 포스트 편집</title>
-
 </head>
 <body>
 <div layout:fragment="content" class="w-full">
@@ -19,8 +18,19 @@
         </div>
 
         <div class="post-write contents flex flex-col">
-            <input id="post-title" name="title" type="text" placeholder="Title here" class="input input-bordered input-info w-full" />
+
+            <div class="flex category-wrapper">
+                <select id="category-select" class="select select-info w-full max-w-xs">
+                    <option disabled value="">Category</option>
+                    <th:block th:if="${categoryList.size() != 0}" th:each="c : ${categoryList}">
+                        <option th:value="${c.code}" th:selected="${#strings.equals(c.code, post.category.code)}"> [[ ${c.name} ]] </option>
+                    </th:block>
+                </select>
+            </div>
+
+            <input id="post-title" name="title" type="text" placeholder="Title here" class="mt-4 input input-bordered input-info w-full" />
             <div class="mt-8 h-full" id="editor"></div>
+
         </div>
 
         <div class="post-write-btn flex flex-row justify-end mt-4">
@@ -38,7 +48,6 @@
         const postId = /*[[ ${post.id} ]]*/;
 
         const postTitleEl = document.querySelector('#post-title');
-
         postTitleEl.value = /*[[ ${post.title} ]]*/;
 
         const editor = new toastui.Editor({
@@ -53,22 +62,32 @@
 
         function doUpdate(e) {
 
+            const headerName = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
+            const tokenValue = document.querySelector("meta[name='_csrf']").getAttribute("content");
+
             const title = document.querySelector("#post-title")
                 .value;
 
             const htmlBody = editor.getHTML();
             const markdownBody = editor.getMarkdown();
 
+            const selectEl = document.querySelector("#category-select");
+            const categoryCode = selectEl.options[selectEl.selectedIndex].value;
+
             const data = {
                 title,
                 htmlBody,
-                markdownBody
+                markdownBody,
+                categoryCode
             };
+
+            console.log('data', data);
 
             fetch(`http://localhost:8083/posts/update/${postId}`, {
                 method: "POST",
                 headers: {
-                    "Content-Type" : "application/json"
+                    "Content-Type" : "application/json",
+                    [headerName] : tokenValue
                 },
                 body : JSON.stringify(data)
             })
@@ -79,10 +98,8 @@
                 )
                 .then(
                     (data) => {
-
                         alert("포스트 수정이 완료되었습니다!");
-                        location.replace(`/posts/${data.postId}`);
-
+                        location.replace('/');
                     }
                 )
                 .catch(

@@ -58,7 +58,8 @@ public class PostService {
             return null;
         }
 
-        findPost.update(postUpdateDto);
+        Category findCategory = categoryService.getByCode(postUpdateDto.getCategoryCode());
+        findPost.update(postUpdateDto, findCategory);
 
         return new PostEditDto(findPost.getId());
 

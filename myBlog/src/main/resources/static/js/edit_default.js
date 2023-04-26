@@ -35,6 +35,8 @@ function writePost(e) {
         categoryCode
     };
 
+    console.log('data', data);
+
     fetch("http://localhost:8083/posts/write", {
         method: "POST",
         headers: {

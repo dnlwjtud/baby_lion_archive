@@ -51,24 +51,19 @@ public class PostController {
         return postService.save(postWriteRequest, account);
     }
 
-//    @GetMapping("/{id}")
-//    public String getPost(
-//            @PathVariable Long id,
-//            Model model
-//    ) {
-//        Post findPost = postService.getById(id);
-//        model.addAttribute("post", findPost); // Map<String, Object>
-//        return "/posts/post_detail";
-//    }
-
     @GetMapping("/update/{id}")
     public String getUpdateView(
             @PathVariable Long id,
             Model model
     ) {
         Post findPost = postService.getById(id);
+        List<Category> categoryList = categoryService.findAll();
+
         model.addAttribute("post", findPost);
+        model.addAttribute("categoryList", categoryList);
+
         return "/posts/post_update";
+
     }
 
     @PostMapping("/update/{id}")
