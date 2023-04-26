@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class CategoryCurdDto {
 
     private String name;
+    private String code;
 
 }

@@ -13,6 +13,8 @@ public class PostWriteRequest {
     @NotBlank
     private String title;
 
+    private String categoryCode;
+
     private String htmlBody;
     private String markdownBody;
 

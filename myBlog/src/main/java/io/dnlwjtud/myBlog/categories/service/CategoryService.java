@@ -43,6 +43,10 @@ public class CategoryService {
 
     }
 
+    public Category getByCode(String code) {
+        return categoryRepository.getByCode(code);
+    }
+
     // 카테고리 목록
     public List<Category> findAll() {
         return categoryRepository.findAll();

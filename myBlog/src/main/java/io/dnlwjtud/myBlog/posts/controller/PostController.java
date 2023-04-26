@@ -36,7 +36,7 @@ public class PostController {
     }
 
     @ResponseBody
-    @PostMapping("/write")
+    @PostMapping("/write") // POST:: /posts/write
     public PostEditDto postWrite(
             @RequestBody @Valid PostWriteRequest postWriteRequest,
             @AuthenticationPrincipal Account account
