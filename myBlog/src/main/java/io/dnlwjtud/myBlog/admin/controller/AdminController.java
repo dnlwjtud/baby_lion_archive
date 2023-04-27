@@ -25,5 +25,11 @@ public class AdminController {
         return "/admin/admin_post";
     }
 
+    @GetMapping("/categories")
+    public String getCategoryPage(Model model) {
+        model.addAttribute("categoryList", adminService.getAllCategory());
+        return "/admin/admin_category";
+    }
+
 
 }
