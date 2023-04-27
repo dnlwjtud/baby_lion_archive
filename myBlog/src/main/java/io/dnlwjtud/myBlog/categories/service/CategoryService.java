@@ -72,9 +72,10 @@ public class CategoryService {
 
     // 카테고리 수정
     @Transactional
-    public Category update(String originName, CategoryCurdDto editCategoryDto) {
+    public Category update(String originCode, CategoryCurdDto editCategoryDto) {
 
-        Category findCategory = getByName(originName);
+//        Category findCategory = getByName(originName);
+        Category findCategory = getByCode(originCode);
 
         if ( findCategory == null ) {
             return null;
@@ -95,6 +96,16 @@ public class CategoryService {
         }
 
         categoryRepository.delete(findCategory);
+
+    }
+
+    @Transactional
+    public void removeById(Long id) {
+        Optional<Category> categoryOptional = categoryRepository.findById(id);
+
+        if ( categoryOptional.isPresent() ) {
+            categoryRepository.delete(categoryOptional.get());
+        }
 
     }
 
