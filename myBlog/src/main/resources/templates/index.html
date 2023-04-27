@@ -13,8 +13,11 @@
         <div class="index-container flex flex-col">
 
             <div class="index-header flex">
-                <span class="text-5xl p-6 mt-6">
-                    Recent Post
+                <span th:if="${curCategory != null}" class="text-5xl p-6 mt-6">
+                    [[ ${curCategory.name} ]]
+                </span>
+                <span th:unless="${curCategory != null}" class="text-5xl p-6 mt-6">
+                    전체 포스트
                 </span>
             </div>
 
@@ -35,7 +38,8 @@
                             <span class="post-title-meta flex text-sm">
                                 Updated At : [[ ${#temporals.format(m.updatedAt, 'yyyy-MM-dd HH:mm')} ]]
                             </span>
-                            <span class="text-sm"> Writer : [[ ${m.account.nickname} ]] </span>
+                            <span class="text-sm flex"> Writer : [[ ${m.account.nickname} ]] </span>
+                            <span class="text-sm flex"> #[[ ${m.category.name} ]] </span>
                         </div>
 
                         <div class="divider"></div>

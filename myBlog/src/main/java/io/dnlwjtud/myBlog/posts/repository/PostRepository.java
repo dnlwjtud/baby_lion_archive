@@ -1,5 +1,6 @@
 package io.dnlwjtud.myBlog.posts.repository;
 
+import io.dnlwjtud.myBlog.categories.entity.Category;
 import io.dnlwjtud.myBlog.posts.entity.Post;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +16,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllByDeleteStatusFalse();
 
     Optional<Post> findByIdAndDeleteStatusFalse(Long id);
+
+    List<Post> findAllByCategory(Category category);
+
 
 }

@@ -2,11 +2,9 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/edit_layout}"
->
+      layout:decorate="~{layouts/edit_layout}">
 <head>
-    <title>BABY LION :: 포스트 편집</title>
-
+    <title> BABY LION :: 포스트 편집 </title>
 </head>
 <body>
 <div layout:fragment="content" class="w-full">
@@ -19,7 +17,19 @@
         </div>
 
         <div class="post-write contents flex flex-col">
-            <input id="post-title" name="title" type="text" placeholder="Title here" class="input input-bordered input-info w-full" />
+
+            <div class="category-wrapper flex">
+
+                <select id="category-select" class="select select-info w-full max-w-xs">
+                    <option disabled value="">Category</option>
+                    <th:block th:each="c : ${categoryList}">
+                        <option th:selected="${#strings.equals(c.code, post.category.code)}" th:value="${c.code}"> [[ ${c.name} ]] </option>
+                    </th:block>
+                </select>
+
+            </div>
+
+            <input id="post-title" name="title" type="text" placeholder="Title here" class="mt-4 input input-bordered input-info w-full" />
             <div class="mt-8 h-full" id="editor"></div>
         </div>
 
@@ -53,6 +63,17 @@
 
         function doUpdate(e) {
 
+            const headerName = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
+            const tokenValue = document.querySelector("meta[name='_csrf']").getAttribute("content");
+
+            const selectEl = document.querySelector("#category-select");
+            const categoryCode = selectEl.options[selectEl.selectedIndex].value;
+
+            if ( categoryCode === "" ) {
+                alert('카테고리를 선택해 주십시오!');
+                return;
+            }
+
             const title = document.querySelector("#post-title")
                 .value;
 
@@ -62,13 +83,15 @@
             const data = {
                 title,
                 htmlBody,
-                markdownBody
+                markdownBody,
+                categoryCode
             };
 
             fetch(`http://localhost:8083/posts/update/${postId}`, {
                 method: "POST",
                 headers: {
-                    "Content-Type" : "application/json"
+                    "Content-Type" : "application/json",
+                    [headerName] : tokenValue
                 },
                 body : JSON.stringify(data)
             })
@@ -81,7 +104,7 @@
                     (data) => {
 
                         alert("포스트 수정이 완료되었습니다!");
-                        location.replace(`/posts/${data.postId}`);
+                        location.replace("/");
 
                     }
                 )

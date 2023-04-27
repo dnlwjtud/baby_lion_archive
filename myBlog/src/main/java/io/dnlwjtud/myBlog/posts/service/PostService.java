@@ -58,7 +58,8 @@ public class PostService {
             return null;
         }
 
-        findPost.update(postUpdateDto);
+        Category findCategory = categoryService.getByCode(postUpdateDto.getCategoryCode());
+        findPost.update(postUpdateDto, findCategory);
 
         return new PostEditDto(findPost.getId());
 
@@ -89,6 +90,13 @@ public class PostService {
         }
 
         return null;
+
+    }
+
+    public List<Post> findAllByCategoryCode(String code) {
+
+        Category findCategory = categoryService.getByCode(code);
+        return postRepository.findAllByCategory(findCategory);
 
     }
 

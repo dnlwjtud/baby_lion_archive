@@ -4,6 +4,8 @@
   <th:block th:fragment="editMeta">
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.js"></script>
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css" importance="high"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" >
+    <meta name="_csrf" th:content="${_csrf.token}" >
   </th:block>
 </head>
 </html>

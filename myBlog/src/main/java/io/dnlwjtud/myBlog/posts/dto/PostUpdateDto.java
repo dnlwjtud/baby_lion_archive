@@ -13,6 +13,8 @@ public class PostUpdateDto {
     @NotBlank
     private String title;
 
+    private String categoryCode;
+
     private String markdownBody;
     private String htmlBody;
 
