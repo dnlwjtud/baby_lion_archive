@@ -22,7 +22,7 @@
     <div class="divider"></div>
 
     <div class="content-category-wrapper w-full">
-      <form action="/adms/categories/update" method="POST">
+      <form th:action="@{/adms/categories/update/{categoryCode}(categoryCode=${category.code})}" method="POST">
 
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" >
 
@@ -32,7 +32,7 @@
             <label class="label">
               <span class="label-text">Name</span>
             </label>
-            <input name="name" type="text" placeholder="Category Name" class="input input-bordered w-full" />
+            <input th:value="${category.name}" name="name" type="text" placeholder="Category Name" class="input input-bordered w-full" />
             <label class="label mt-1">
               <span class="label-text-alt">공개될 카테고리의 이름을 입력해주세요</span>
             </label>
@@ -42,7 +42,7 @@
             <label class="label">
               <span class="label-text">Code</span>
             </label>
-            <input name="code" type="text" placeholder="Category Code" class="input input-bordered w-full" />
+            <input th:value="${category.code}" name="code" type="text" placeholder="Category Code" class="input input-bordered w-full" />
             <label class="label mt-1">
               <span class="label-text-alt">사용할 카테고리의 코드를 입력해주세요, 코드는 중복될 수 없습니다.</span>
             </label>
@@ -53,6 +53,11 @@
 
         <div class="category-form-footer flex w-full justify-end mt-4">
           <button class="btn btn-ghost">편집</button>
+          <button class="btn btn-ghost">
+            <a th:href="@{/adms/categories}">
+              취소
+            </a>
+          </button>
         </div>
       </form>
     </div>

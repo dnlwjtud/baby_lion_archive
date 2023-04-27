@@ -37,7 +37,11 @@
           <tbody class="max-w-xs">
           <tr class="hover" th:each="c : ${categoryList}">
             <th>[[ ${c.id} ]]</th>
-            <td class="whitespace-pre-wrap">[[ ${c.name} ]]</td>
+            <td class="">
+              <a th:href="@{/adms/categories/update/{categoryCode}(categoryCode=${c.code})}">
+                [[ ${c.name} ]]
+              </a>
+            </td>
             <td>[[ ${c.code} ]]</td>
             <td> [[ ${#temporals.format(c.createdAt, 'yyyy-MM-dd HH:mm')} ]] </td>
             <td class="max-w-xs">

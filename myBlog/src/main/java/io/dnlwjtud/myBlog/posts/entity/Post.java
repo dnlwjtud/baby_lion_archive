@@ -32,7 +32,7 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     private Account account;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
 //    @JoinColumn(name = "category_id")
     private Category category;
 

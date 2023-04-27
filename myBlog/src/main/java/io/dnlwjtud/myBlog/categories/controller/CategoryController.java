@@ -1,10 +1,12 @@
 package io.dnlwjtud.myBlog.categories.controller;
 
 import io.dnlwjtud.myBlog.categories.dto.CategoryCurdDto;
+import io.dnlwjtud.myBlog.categories.entity.Category;
 import io.dnlwjtud.myBlog.categories.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,17 +31,22 @@ public class CategoryController {
         return "redirect:/adms/categories";
     }
 
-    @GetMapping("/adms/categories/update")
-    public String getUpdateView() {
-        return "/category/create_category";
+    @GetMapping("/adms/categories/update/{categoryCode}")
+    public String getUpdateView(
+            @PathVariable(name = "categoryCode") String categoryCode,
+            Model model
+    ) {
+        Category findCategory = categoryService.getByCode(categoryCode);
+        model.addAttribute("category", findCategory);
+        return "/category/update_category";
     }
 
-    @PostMapping("/adms/categories/update")
+    @PostMapping("/adms/categories/update/{categoryCode}")
     public String updateCategory(
-            @RequestParam(value = "origin") String originCode,
+            @PathVariable(name = "categoryCode") String categoryCode,
             @Valid CategoryCurdDto categoryCurdDto
     ) {
-        categoryService.update(originCode, categoryCurdDto);
+        categoryService.update(categoryCode, categoryCurdDto);
         return "redirect:/adms/categories";
     }
 
