@@ -15,7 +15,8 @@ public class AdminController {
     private final AdminService adminService;
 
     @GetMapping("/index")
-    public String getAdminIndex() {
+    public String getAdminIndex(Model model) {
+        model.addAttribute("account", adminService.getAdmin());
         return "/admin/admin_index";
     }
 

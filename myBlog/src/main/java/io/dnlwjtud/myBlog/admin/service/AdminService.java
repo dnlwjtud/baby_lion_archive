@@ -1,5 +1,6 @@
 package io.dnlwjtud.myBlog.admin.service;
 
+import io.dnlwjtud.myBlog.accounts.entity.Account;
 import io.dnlwjtud.myBlog.accounts.service.AccountService;
 import io.dnlwjtud.myBlog.categories.entity.Category;
 import io.dnlwjtud.myBlog.categories.service.CategoryService;
@@ -19,6 +20,10 @@ public class AdminService {
     private final AccountService accountService;
     private final PostService postService;
     private final CategoryService categoryService;
+
+    public Account getAdmin() {
+        return accountService.findById(1L);
+    }
 
     public List<Post> getAllPost() {
         return postService.findAll();

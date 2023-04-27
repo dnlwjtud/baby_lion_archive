@@ -47,6 +47,18 @@ public class AccountService implements UserDetailsService {
 
     }
 
+    public Account findById(Long id) {
+
+        Optional<Account> accountOptional = accountRepository.findById(id);
+
+        if ( accountOptional.isPresent() ) {
+            return accountOptional.get();
+        }
+
+        return null;
+
+    }
+
 
 
 
