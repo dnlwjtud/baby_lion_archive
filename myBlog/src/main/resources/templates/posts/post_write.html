@@ -21,7 +21,19 @@
                     </div>
 
                     <div class="post-write contents flex flex-col">
-                        <input id="post-title" name="title" type="text" placeholder="Title here" class="input input-bordered input-info w-full" />
+
+                        <div class="category-wrapper flex">
+
+                            <select id="category-select" class="select select-info w-full max-w-xs">
+                                <option disabled selected value="">Category</option>
+                                <th:block th:each="c : ${categoryList}">
+                                    <option th:value="${c.code}"> [[ ${c.name} ]] </option>
+                                </th:block>
+                            </select>
+
+                        </div>
+
+                        <input id="post-title" name="title" type="text" placeholder="Title here" class="mt-4 input input-bordered input-info w-full" />
                         <div class="mt-8 h-full" id="editor"></div>
                     </div>
 

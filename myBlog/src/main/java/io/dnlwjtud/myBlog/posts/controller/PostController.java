@@ -1,6 +1,8 @@
 package io.dnlwjtud.myBlog.posts.controller;
 
 import io.dnlwjtud.myBlog.accounts.entity.Account;
+import io.dnlwjtud.myBlog.categories.entity.Category;
+import io.dnlwjtud.myBlog.categories.service.CategoryService;
 import io.dnlwjtud.myBlog.posts.dto.PostUpdateDto;
 import io.dnlwjtud.myBlog.posts.dto.PostEditDto;
 import io.dnlwjtud.myBlog.posts.dto.PostWriteRequest;
@@ -22,6 +24,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final CategoryService categoryService;
 
     @GetMapping("/list")
     @ResponseBody
@@ -31,7 +34,11 @@ public class PostController {
     }
 
     @GetMapping("/write")
-    public String getPostWriteView() {
+    public String getPostWriteView(Model model) {
+
+        List<Category> categoryList = categoryService.findAll();
+        model.addAttribute("categoryList", categoryList);
+
         return "/posts/post_write";
     }
 
@@ -44,15 +51,15 @@ public class PostController {
         return postService.save(postWriteRequest, account);
     }
 
-    @GetMapping("/{id}")
-    public String getPost(
-            @PathVariable Long id,
-            Model model
-    ) {
-        Post findPost = postService.getById(id);
-        model.addAttribute("post", findPost); // Map<String, Object>
-        return "/posts/post_detail";
-    }
+//    @GetMapping("/{id}")
+//    public String getPost(
+//            @PathVariable Long id,
+//            Model model
+//    ) {
+//        Post findPost = postService.getById(id);
+//        model.addAttribute("post", findPost); // Map<String, Object>
+//        return "/posts/post_detail";
+//    }
 
     @GetMapping("/update/{id}")
     public String getUpdateView(

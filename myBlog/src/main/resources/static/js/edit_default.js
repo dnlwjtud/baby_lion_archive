@@ -11,6 +11,14 @@ function writePost(e) {
     const headerName = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
     const tokenValue = document.querySelector("meta[name='_csrf']").getAttribute("content");
 
+    const selectEl = document.querySelector("#category-select");
+    const categoryCode = selectEl.options[selectEl.selectedIndex].value;
+
+    if ( categoryCode === "" ) {
+        alert('카테고리를 선택해 주십시오!');
+        return;
+    }
+
     // 제목
     const postTitle = document.querySelector("#post-title")
         .value;
@@ -22,7 +30,8 @@ function writePost(e) {
     const data = {
         "title" : postTitle,
         htmlBody,
-        markdownBody
+        markdownBody,
+        categoryCode
     };
 
     fetch("http://localhost:8083/posts/write", {
@@ -38,13 +47,9 @@ function writePost(e) {
     )
     .then(
         (data) => {
-
-            console.log(data);
-
             alert("포스트 작성이 완료되었습니다.");
-
-            location.replace(`/posts/${data.postId}`);
-
+            // location.replace(`/posts/${data.postId}`);
+            location.replace("/");
         }
     )
     .catch(

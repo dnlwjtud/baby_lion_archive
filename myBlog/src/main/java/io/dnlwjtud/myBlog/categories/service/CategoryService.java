@@ -26,7 +26,7 @@ public class CategoryService {
             // 10회 save()
 
             Category category = Category.createCategory(
-                    new CategoryCurdDto("카테고리 " + i, "category " + i)
+                    new CategoryCurdDto("카테고리 " + i, "category_" + i)
             );
 
             categoryRepository.save(category);
