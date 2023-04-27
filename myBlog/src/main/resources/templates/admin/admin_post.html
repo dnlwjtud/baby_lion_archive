@@ -1,13 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin_layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>BABY LION :: 포스트 </title>
 </head>
 <body>
-  <!-- Post -->
-  <div class="setting-post-container">
-    hello world!
-  </div>
+<div layout:fragment="content" class="w-full">
+
+    <div class="admin-contents-wrapper flex flex-col w-full mt-16">
+
+        <div class="content-header flex">
+
+                <span class="text-4xl font-bold">
+                    포스트 관리
+                </span>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="content-post-wrapper w-full">
+            <div class="max-w-full overflow-x-auto w-full">
+                <table class="table w-full">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>category</th>
+                        <th>created at</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody class="max-w-xs">
+                    <tr class="hover" th:each="p : ${postList}">
+                        <th>[[ ${p.id} ]]</th>
+                        <td class="whitespace-pre-wrap">[[ ${p.title} ]]</td>
+                        <td>[[ ${p.category.name} ]]</td>
+                        <td> [[ ${#temporals.format(p.createdAt, 'yyyy-MM-dd HH:mm')} ]] </td>
+                        <td class="max-w-xs">
+                            <button class="btn btn-ghost btn-xs text-red-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 </body>
 </html>

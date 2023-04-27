@@ -23,14 +23,14 @@ public class AccountService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void initAccountData() {
+    public Account initAccountData() {
 
         AccountCreateDto accountCreateDto = new AccountCreateDto("admin", passwordEncoder.encode("admin"), "관리자");
         Account account = Account.createAccount(accountCreateDto);
 
         account.appendRole(Role.ADMIN);
 
-        accountRepository.save(account);
+        return accountRepository.save(account);
 
     }
 

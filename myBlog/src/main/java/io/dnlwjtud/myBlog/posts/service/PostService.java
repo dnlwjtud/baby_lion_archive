@@ -10,6 +10,7 @@ import io.dnlwjtud.myBlog.posts.entity.Post;
 import io.dnlwjtud.myBlog.posts.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,24 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final CategoryService categoryService;
+
+    @Transactional
+    public void postInit(Account account) {
+        for ( int i = 1; i < 10; i++ ) {
+
+            String categoryCode = "category_" + i;
+
+            Post savedPost = postRepository.save(
+                    Post.createPost(new PostWriteRequest("제목 " + i, categoryCode, "제목", ""), account)
+            );
+
+            savedPost.setCategory(categoryService.getByCode(categoryCode));
+            postRepository.save(savedPost);
+
+        }
+
+    }
+
 
     public List<Post> findAllByTitle(String title, Pageable pageable) {
         List<Post> postList = postRepository.findAllByTitleContaining(title, pageable);
