@@ -23,9 +23,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                     .requestMatchers("/posts/write")
                         .hasAnyRole(Role.ADMIN.getValue())
-                    .requestMatchers("/posts/**")
-                        .permitAll()
-                    .requestMatchers("/admin/**")
+//                    .requestMatchers("/posts/**")
+//                        .permitAll()
+                    .requestMatchers("/adms/**")
                         .hasAnyRole(Role.ADMIN.getValue())
                     .anyRequest()
                         .permitAll()
@@ -46,7 +46,7 @@ public class SecurityConfig {
                     .invalidateHttpSession(true) // 로그아웃시, HttpSession을 비활성화 하도록 SecurityContextLogoutHandler 구성하는 메서드
     //                .deleteCookies("") // 로그아웃 시 삭제할 쿠키의 이름을 나열
 //                .logoutUrl() // 실제 로그아웃을 수행할 주소 설정
-//                .logoutSuccessUrl("")// 로그아웃 된 다음 이동될 URL 설정
+                .logoutSuccessUrl("/")// 로그아웃 된 다음 이동될 URL 설정
             .and()
                 .build();
     }

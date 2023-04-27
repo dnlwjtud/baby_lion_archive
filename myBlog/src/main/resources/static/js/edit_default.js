@@ -34,7 +34,7 @@ function writePost(e) {
         categoryCode
     };
 
-    fetch("http://localhost:8083/posts/write", {
+    fetch("http://localhost:8083/adms/posts/write", {
         method: "POST",
         headers: {
             "Content-Type" : "application/json",

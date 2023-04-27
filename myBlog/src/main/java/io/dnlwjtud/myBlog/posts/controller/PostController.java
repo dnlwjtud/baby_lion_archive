@@ -19,7 +19,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping("/posts")
+@RequestMapping("/adms/posts")
 @RequiredArgsConstructor
 public class PostController {
 
