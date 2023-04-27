@@ -8,7 +8,63 @@
 </head>
 <body>
     <div layout:fragment="content" class="w-full">
-        admin index page
+
+        <div class="admin-contents-wrapper flex flex-col w-full mt-16">
+
+            <div class="content-header flex">
+
+                <span class="text-4xl font-bold">
+                    계정 정보 수정
+                </span>
+
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="content-account-info flex w-full">
+
+                <div class="info-nickname w-full">
+
+                    <div class="form-control w-full flex flex-row justify-center items-center">
+                        <div class="nickname-input-wrapper flex flex-col w-full">
+                            <label class="label">
+                                <span class="label-text">Nickname</span>
+                            </label>
+                            <input type="text" placeholder="Nickname" class="input input-bordered w-full" />
+                            <label class="label mt-1">
+                                <span class="label-text-alt">변경하고자 하는 닉네임을 입력해주세요</span>
+                            </label>
+                        </div>
+
+                        <div class="nickname-btn-wrapper flex mx-6">
+                            <button class="btn btn-outline btn-primary">Confirm</button>
+                        </div>
+
+                    </div>
+
+                    <div class="form-control w-full flex flex-row justify-center items-center mt-8">
+                        <div class="pwd-input-wrapper flex flex-col w-full">
+                            <label class="label">
+                                <span class="label-text">Password</span>
+                            </label>
+                            <input type="text" placeholder="Password" class="input input-bordered w-full" />
+                            <label class="label mt-1">
+                                <span class="label-text-alt">변경하고자 하는 비밀번호를 입력해주세요</span>
+                            </label>
+                        </div>
+
+                        <div class="nickname-btn-wrapper flex mx-6">
+                            <button class="btn btn-outline btn-primary">Confirm</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 </body>
 </html>

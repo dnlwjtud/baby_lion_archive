@@ -22,7 +22,7 @@ public class GlobalController {
     private final CategoryService categoryService;
 
 
-    @GetMapping("/") // all
+    @GetMapping("/")
     public String getIndex(
             Model model,
             @RequestParam(value = "category", defaultValue = "all") String categoryCode
@@ -41,11 +41,6 @@ public class GlobalController {
         model.addAttribute("curCategory", categoryService.getByCode(categoryCode));
 
         return "index";
-    }
-
-    @GetMapping("/admin/test")
-    public String getTestPage() {
-        return "/admin/admin_index";
     }
 
 }
