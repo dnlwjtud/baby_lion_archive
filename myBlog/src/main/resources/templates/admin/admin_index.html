@@ -4,7 +4,12 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/admin_layout}">
 <head>
+
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" >
+    <meta name="_csrf" th:content="${_csrf.token}" >
+
     <title>BABY LION :: 계정 </title>
+
 </head>
 <body>
     <div layout:fragment="content" class="w-full">
@@ -30,14 +35,14 @@
                             <label class="label">
                                 <span class="label-text">Nickname</span>
                             </label>
-                            <input th:value="${account.nickname}" type="text" placeholder="Nickname" class="input input-bordered w-full" />
+                            <input id="account-nickname" th:value="${account.nickname}" type="text" placeholder="Nickname" class="input input-bordered w-full" />
                             <label class="label mt-1">
                                 <span class="label-text-alt">변경하고자 하는 닉네임을 입력해주세요</span>
                             </label>
                         </div>
 
                         <div class="nickname-btn-wrapper flex mx-6">
-                            <button class="btn btn-outline btn-primary">Confirm</button>
+                            <button class="btn btn-outline btn-primary" onclick="changeNickname()">Confirm</button>
                         </div>
 
                     </div>
@@ -47,14 +52,14 @@
                             <label class="label">
                                 <span class="label-text">Password</span>
                             </label>
-                            <input type="text" placeholder="Password" class="input input-bordered w-full" />
+                            <input id="account-password" type="password" placeholder="Password" class="input input-bordered w-full" />
                             <label class="label mt-1">
                                 <span class="label-text-alt">변경하고자 하는 비밀번호를 입력해주세요</span>
                             </label>
                         </div>
 
                         <div class="nickname-btn-wrapper flex mx-6">
-                            <button class="btn btn-outline btn-primary">Confirm</button>
+                            <button class="btn btn-outline btn-primary" onclick="changePwd()">Confirm</button>
                         </div>
 
                     </div>
@@ -64,7 +69,7 @@
             </div>
 
         </div>
-
+        <script src="/js/admin_index.js"></script>
     </div>
 </body>
 </html>

@@ -23,6 +23,8 @@ public class Category {
     private Long id;
 
     private String name;
+
+    @Column(unique = true)
     private String code;
 
     @OneToMany(cascade = CascadeType.REMOVE) // (mappedBy = "category")

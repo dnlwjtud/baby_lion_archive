@@ -59,7 +59,26 @@ public class AccountService implements UserDetailsService {
 
     }
 
+    public Account getByUsername(String username) {
 
+        Optional<Account> accountOptional = accountRepository.findByUsername(username);
+
+        if ( accountOptional.isPresent() ) {
+            return accountOptional.get();
+        }
+
+        return null;
+    }
+
+    @Transactional
+    public Account updateNickname(String username, String nickname) {
+        return getByUsername(username).updateNickname(nickname);
+    }
+
+    @Transactional
+    public Account updatePassword(String username, String rawPassword) {
+        return getByUsername(username).updatePassword(passwordEncoder.encode(rawPassword));
+    }
 
 
 }
