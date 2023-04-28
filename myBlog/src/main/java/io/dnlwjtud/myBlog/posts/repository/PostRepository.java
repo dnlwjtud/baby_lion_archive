@@ -17,7 +17,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Optional<Post> findByIdAndDeleteStatusFalse(Long id);
 
-    List<Post> findAllByCategory(Category category);
+    List<Post> findAllByCategoryAndDeleteStatusFalse(Category category);
 
 
 }

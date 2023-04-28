@@ -24,6 +24,25 @@ public class PostService {
     private final PostRepository postRepository;
     private final CategoryService categoryService;
 
+    @Transactional
+    public void postInit(Account account) {
+
+        for ( int i = 1; i < 10; i++ ) {
+
+            String categoryCode = "category_" + i;
+
+            PostWriteRequest postWriteRequest = new PostWriteRequest("제목 " + i, categoryCode, "제목", "");
+
+            Post createdPost = Post.createPost(postWriteRequest, account);
+            Category findCategory = categoryService.getByCode(categoryCode);
+            createdPost.setCategory(findCategory);
+
+            postRepository.save(createdPost);
+
+        }
+
+    }
+
     public List<Post> findAllByTitle(String title, Pageable pageable) {
         List<Post> postList = postRepository.findAllByTitleContaining(title, pageable);
         return postList;
@@ -33,6 +52,10 @@ public class PostService {
     public List<Post> findAll() {
         List<Post> postList = postRepository.findAllByDeleteStatusFalse();
         return postList;
+    }
+
+    public List<Post> findAllNotDeletedPost() {
+        return postRepository.findAllByDeleteStatusFalse();
     }
 
     @Transactional
@@ -96,7 +119,9 @@ public class PostService {
     public List<Post> findAllByCategoryCode(String code) {
 
         Category findCategory = categoryService.getByCode(code);
-        return postRepository.findAllByCategory(findCategory);
+
+        // 삭제되지 않은 포스트만 필터하여 조회함
+        return postRepository.findAllByCategoryAndDeleteStatusFalse(findCategory);
 
     }
 

@@ -40,6 +40,17 @@ public class Account implements UserDetails {
     protected Account() {
     }
 
+    public Account updatePassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public Account updateNickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
+
     public static Account createAccount(AccountCreateDto accountCreateDto) {
 
         Account account = new Account();

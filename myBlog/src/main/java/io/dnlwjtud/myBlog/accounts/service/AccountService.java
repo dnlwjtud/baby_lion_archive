@@ -22,15 +22,27 @@ public class AccountService implements UserDetailsService {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
 
+    public Account findById(Long id) {
+
+        Optional<Account> accountOptional = accountRepository.findById(id);
+
+        if ( accountOptional.isPresent() ) {
+            return accountOptional.get();
+        }
+
+        return null;
+
+    }
+
     @Transactional
-    public void initAccountData() {
+    public Account initAccountData() {
 
         AccountCreateDto accountCreateDto = new AccountCreateDto("admin", passwordEncoder.encode("admin"), "관리자");
         Account account = Account.createAccount(accountCreateDto);
 
         account.appendRole(Role.ADMIN);
 
-        accountRepository.save(account);
+        return accountRepository.save(account);
 
     }
 
@@ -47,7 +59,28 @@ public class AccountService implements UserDetailsService {
 
     }
 
+    public Account getByUsername(String username) {
 
+        Optional<Account> accountOptional = accountRepository.findByUsername(username);
 
+        if ( accountOptional.isPresent() ) {
+            return accountOptional.get();
+        }
+
+        return null;
+
+    }
+
+    @Transactional
+    public Account updateNickname(String username, String nickname) {
+        Account findAccount = getByUsername(username);
+        return findAccount.updateNickname(nickname);
+    }
+
+    @Transactional
+    public Account updatePassword(String username, String rawPassword) {
+        Account findAccount = getByUsername(username);
+        return findAccount.updatePassword(passwordEncoder.encode(rawPassword));
+    }
 
 }
